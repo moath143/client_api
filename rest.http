@@ -1,0 +1,23 @@
+### User sign up endpoint
+POST http://localhost:5000/v1/user
+Content-Type: application/json
+
+{
+    "name": "moath",
+    "company": "microsoft",
+    "address": "gaza",
+    "phone": "0597729262",
+    "email": "moath12345@gmail.com",
+    "password": "1431993qm"
+    
+}
+
+### User sign in endpoint
+POST http://localhost:5000/v1/user/login
+Content-Type: application/json
+
+{
+    "email": "moath12345@gmail.com",
+    "password": "1431993qm"
+    
+}
