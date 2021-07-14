@@ -2,11 +2,6 @@ const express = require("express");
 
 const router = express.Router();
 
-// router.all('/', (req, res, next) => {
-
-//     // res.json({message: 'hello from user router'})
-//     // next()
-// });
 
 const { hashPassword, comparePass } = require("../helpers/bcrypt.helpers");
 
@@ -52,7 +47,6 @@ router.post("/login", async (req, res, next) => {
   }
   //get user with email from DB
   const user = await getUserByEmail(email);
-  console.log(user);
 
   const passFromDb = user && user._id ? user.password : null;
 
@@ -65,11 +59,9 @@ router.post("/login", async (req, res, next) => {
     return res.json({ status: "error", message: "Invalid email or password " });
   }
 
-  const accessJWT = await createAccessJWT(user.email);
-  const refreshJWT = await createRefreshJWT(user.email);
+  const accessJWT = await createAccessJWT(user.email, `${user._id}`);
+  const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
 
-  console.log("the result");
-  console.log(result);
 
   res.json({
     status: "success",
